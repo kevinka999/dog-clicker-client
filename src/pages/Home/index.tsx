@@ -1,8 +1,15 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, DogSVG, Input } from "../../components";
+import { useContext } from "react";
+import { GlobalContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const { setUserData } = useContext(GlobalContext);
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     validationSchema: yup.object({
       dogIdentifier: yup
@@ -19,7 +26,12 @@ export const Home = () => {
       nickname: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      setUserData({
+        dogId: values.dogIdentifier,
+        nickname: values.nickname,
+      });
+
+      navigate("/play");
     },
   });
 
