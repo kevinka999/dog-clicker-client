@@ -1,10 +1,17 @@
-import { DogSVG } from "./components";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Home, Game } from "./pages";
 
 export const App = () => {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Dog clicker</h1>
-      <DogSVG />
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "play",
+      element: <Game />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 };

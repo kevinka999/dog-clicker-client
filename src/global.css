@@ -4,8 +4,14 @@
 
 :root {
   font-family: "Noto Sans", sans-serif;
+  height: 100vh;
 }
 
 body {
   background-color: #212124;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
