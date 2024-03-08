@@ -1,0 +1,21 @@
+#animated-container {
+  position: relative;
+}
+
+.heart-fade-up {
+  position: absolute;
+  bottom: 85px;
+  left: 210px;
+  animation: fadeUp 1.5s ease-out;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -30px) rotate(-15deg);
+  }
+}

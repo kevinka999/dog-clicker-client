@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Button, DogSVG, Input } from "../../components";
+import { Button, Input } from "../../components";
 import { useContext } from "react";
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ export const Home = () => {
     <div className="flex w-full h-screen">
       <div className="flex flex-col items-center justify-center w-full">
         <div className="flex flex-row items-center gap-2">
-          <DogSVG height={42} width={42} />
+          <img src="./dog.png" height={42} width={42} />
           <h1 className="text-3xl font-bold text-center text-white">
             Dog clicker
           </h1>
