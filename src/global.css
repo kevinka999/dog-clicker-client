@@ -1,7 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 body {
-  background-color: #5e5a5a;
+  background-color: #212124;
 }
