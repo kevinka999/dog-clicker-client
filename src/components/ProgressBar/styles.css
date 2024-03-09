@@ -1,0 +1,17 @@
+.animated-progress {
+  background: linear-gradient(-45deg, #4da05c, #96d896, #b4eeb5, #76d576);
+  background-size: 400% 400%;
+  animation: progress-gradient 1.8s ease infinite;
+}
+
+@keyframes progress-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
