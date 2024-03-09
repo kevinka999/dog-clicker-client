@@ -19,7 +19,8 @@ export const Game = () => {
     <div className="flex justify-center h-screen">
       <div className="flex flex-col items-center justify-between h-full w-[300px] py-8">
         <div className="flex flex-col gap-2 text-center w-[300px]">
-          <h1 className="text-3xl text-white mb-4">{userData?.dogId}</h1>
+          <h1 className="text-3xl text-white">{userData?.dogId}</h1>
+          <span className="text-xs text-stone-300 text-right">Lv. 19</span>
           <ProgressBar percent={progress} />
         </div>
 
