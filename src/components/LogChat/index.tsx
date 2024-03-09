@@ -6,16 +6,14 @@ export const LogChat = ({ texts }: { texts: string[] }) => {
     scrollDown();
 
     function scrollDown() {
-      const container = document.getElementById(
-        "chat-container"
-      ) as HTMLElement;
-      container.scrollTop = container.scrollHeight;
+      const chat = document.getElementById("chat") as HTMLElement;
+      chat.scrollTop = chat.scrollHeight;
     }
   }, [texts]);
 
   return (
-    <div id="chat-container">
-      <div className="flex flex-col">
+    <div className="chat-container">
+      <div id="chat">
         {texts.map((text, idx) => (
           <p key={idx} className="text-white">
             {text}
@@ -23,7 +21,7 @@ export const LogChat = ({ texts }: { texts: string[] }) => {
         ))}
       </div>
 
-      <div id="gradient"></div>
+      <div className="chat-overlay"></div>
     </div>
   );
 };

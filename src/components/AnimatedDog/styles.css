@@ -4,8 +4,9 @@
 
 .heart-fade-up {
   position: absolute;
-  bottom: 85px;
-  left: 210px;
+  bottom: 60%;
+  left: 52%;
+  transform: translate(-50%, -50%);
   animation: fadeUp 1.5s ease-out;
 }
 

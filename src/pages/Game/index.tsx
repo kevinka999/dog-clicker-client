@@ -16,7 +16,7 @@ export const Game = () => {
   }, [userData]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center justify-between h-screen py-8">
       <h1 className="text-3xl text-white mb-4">{userData?.dogId}</h1>
       <AnimatedDog
         onClick={() =>
