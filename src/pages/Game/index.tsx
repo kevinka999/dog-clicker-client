@@ -2,14 +2,27 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import { AnimatedDog, LogChat, ProgressBar } from "../../components";
+import { Socket, io } from "socket.io-client";
 
 export const Game = () => {
   const [progress, setProgress] = useState<number>(0);
   const [texts, setTexts] = useState<string[]>([]);
+  const [socket, setSocket] = useState<Socket>();
 
   const { userData } = useContext(GlobalContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const socketConnection = io(import.meta.env.VITE_SERVER_URL);
+    setSocket(socketConnection);
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!userData || !userData.dogId || !userData.nickname) navigate("/");

@@ -4,6 +4,7 @@ import { Button, Input } from "../../components";
 import { useContext } from "react";
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
+import { httpService } from "../../services";
 
 export const Home = () => {
   const { setUserData } = useContext(GlobalContext);
@@ -26,12 +27,21 @@ export const Home = () => {
       nickname: "",
     },
     onSubmit: (values) => {
-      setUserData({
-        dogId: values.dogIdentifier,
-        nickname: values.nickname,
-      });
+      const path = import.meta.env.VITE_SERVER_URL + "/login";
 
-      navigate("/play");
+      httpService()
+        .post<{ _id: string }>(path, { dogIndetifier: values.dogIdentifier })
+        .then((response) => {
+          setUserData({
+            dogId: response._id,
+            nickname: values.nickname,
+          });
+
+          navigate("/play");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   });
 
