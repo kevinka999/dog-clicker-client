@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import "./styles.css";
 
-export const LogChat = ({ texts }: { texts: string[] }) => {
+export const LogChat = ({ chat }: { chat: string[] }) => {
   useLayoutEffect(() => {
     scrollDown();
 
@@ -9,14 +9,14 @@ export const LogChat = ({ texts }: { texts: string[] }) => {
       const chat = document.getElementById("chat") as HTMLElement;
       chat.scrollTop = chat.scrollHeight;
     }
-  }, [texts]);
+  }, [chat]);
 
   return (
     <div className="chat-container">
       <div id="chat">
-        {texts.map((text, idx) => (
+        {chat.map((message, idx) => (
           <p key={idx} className="text-white">
-            {text}
+            {message}
           </p>
         ))}
       </div>

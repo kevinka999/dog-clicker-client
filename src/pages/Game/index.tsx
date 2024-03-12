@@ -1,50 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../../context";
-import { useNavigate } from "react-router-dom";
 import { AnimatedDog, LogChat, ProgressBar } from "../../components";
-import { Socket, io } from "socket.io-client";
+import { SocketContext } from "../../context";
 
 export const Game = () => {
+  const { socket, dogData } = useContext(SocketContext);
+  const [chat, setChat] = useState<string[]>([]);
   const [progress, setProgress] = useState<number>(0);
-  const [texts, setTexts] = useState<string[]>([]);
-  const [socket, setSocket] = useState<Socket>();
-  const [dogInfo, setDogInfo] = useState<string>("Loading");
-
-  const { userData } = useContext(GlobalContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!userData || !userData.dogId || !userData.nickname) navigate("/");
-
-    const socketConnection = io(import.meta.env.VITE_SERVER_URL, {
-      extraHeaders: {
-        "dog-identifier": userData?.dogId || "",
-        "player-identifier": userData?.nickname || "",
-      },
-    });
-    setSocket(socketConnection);
-
-    window.addEventListener("beforeunload", () => {
-      if (socket && socket.connected) socket?.disconnect();
-    });
-
-    return () => {
-      if (socket) {
-        socket.disconnect();
-      }
-    };
-  }, [userData]);
 
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("connected", (dogInfo: { name: string }) => {
-      setDogInfo(dogInfo.name);
-    });
-
     socket.on("newJoin", (nickname: string) => {
-      setTexts((prev) => [...prev, `${nickname} entrou no lobby`]);
+      setChat((prev) => [...prev, `${nickname} joined the lobby`]);
     });
 
     socket.on("exp", (expGained: number, nickname: string) => {
@@ -53,7 +20,7 @@ export const Game = () => {
         return prev + expGained;
       });
 
-      setTexts((prev) => [
+      setChat((prev) => [
         ...prev,
         `${nickname} ganhou ${expGained} de experiencia`,
       ]);
@@ -64,7 +31,7 @@ export const Game = () => {
     <div className="flex justify-center h-screen">
       <div className="flex flex-col items-center justify-between h-full w-[300px] py-8">
         <div className="flex flex-col gap-2 text-center w-[300px]">
-          <h1 className="text-3xl text-white">{dogInfo}</h1>
+          <h1 className="text-3xl text-white">{dogData?.name}</h1>
           <span className="text-xs text-stone-300 text-right">Lv. 19</span>
           <ProgressBar percent={progress} />
         </div>
@@ -75,7 +42,7 @@ export const Game = () => {
             socket?.emit("dogClicked");
           }}
         />
-        <LogChat texts={texts} />
+        <LogChat chat={chat} />
       </div>
     </div>
   );
