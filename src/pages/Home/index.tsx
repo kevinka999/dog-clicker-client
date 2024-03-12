@@ -23,8 +23,8 @@ export const Home = () => {
         .required("Provide your nickname"),
     }),
     initialValues: {
-      dogIdentifier: "",
-      nickname: "",
+      dogIdentifier: "Aurora",
+      nickname: "Kevin",
     },
     onSubmit: (values) => {
       const path = import.meta.env.VITE_SERVER_URL + "/login";
