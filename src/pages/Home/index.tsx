@@ -46,7 +46,7 @@ export const Home = () => {
   });
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-full">
       <div className="flex flex-col items-center justify-center w-full">
         <div className="flex flex-row items-center gap-2">
           <img src="./dog.png" height={42} width={42} />

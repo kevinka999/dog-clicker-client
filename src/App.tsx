@@ -1,20 +1,27 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, Game } from "./pages";
+import { Template } from "./components";
 import { GlobalProvider, SocketProvider } from "./context";
 
 export const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/home",
-      element: <Home />,
-    },
-    {
       path: "/",
-      element: <SocketProvider />,
+      element: <Template />,
       children: [
         {
+          path: "home",
+          element: <Home />,
+        },
+        {
           path: "play",
-          element: <Game />,
+          element: <SocketProvider />,
+          children: [
+            {
+              path: "",
+              element: <Game />,
+            },
+          ],
         },
       ],
     },
