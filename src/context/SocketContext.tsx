@@ -8,14 +8,11 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 import { GlobalContext } from ".";
-
-type DogData = {
-  name: string;
-};
+import { Dog } from "../types";
 
 interface SocketContext {
   socket?: Socket;
-  dogData?: DogData;
+  dogData?: Dog;
 }
 
 export const SocketContext = createContext({} as SocketContext);
@@ -23,7 +20,7 @@ export const SocketContext = createContext({} as SocketContext);
 export function SocketProvider() {
   const { userData } = useContext(GlobalContext);
   const [socket, setSocket] = useState<Socket>();
-  const [dogData, setDogData] = useState<DogData>();
+  const [dogData, setDogData] = useState<Dog>();
 
   const navigate = useNavigate();
 
@@ -52,7 +49,7 @@ export function SocketProvider() {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("connected", (dogData: { name: string }) => {
+    socket.on("connected", (dogData: Dog) => {
       setDogData(dogData);
     });
   }, [socket]);
