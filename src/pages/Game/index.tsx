@@ -18,10 +18,16 @@ export const Game = () => {
       setChat((prev) => [...prev, `${nickname} joined the lobby`]);
     });
 
-    socket.on("exp", (exp: number, nickname: string) => {
-      setLocalExp(exp);
-      setChat((prev) => [...prev, `${nickname} ganhou ${exp} de experiencia`]);
-    });
+    socket.on(
+      "exp",
+      (expGained: number, totalExp: number, nickname: string) => {
+        setLocalExp(totalExp);
+        setChat((prev) => [
+          ...prev,
+          `${nickname} ganhou ${expGained} de experiencia`,
+        ]);
+      }
+    );
   }, [socket]);
 
   useEffect(() => {
