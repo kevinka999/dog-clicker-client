@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { Home, Game } from "./pages";
 import { Template } from "./components";
 import { GlobalProvider, SocketProvider } from "./context";
@@ -6,15 +10,14 @@ import { GlobalProvider, SocketProvider } from "./context";
 export const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
       element: <Template />,
       children: [
         {
-          path: "home",
+          path: "/",
           element: <Home />,
         },
         {
-          path: "play",
+          path: "/play",
           element: <SocketProvider />,
           children: [
             {
@@ -23,6 +26,7 @@ export const App = () => {
             },
           ],
         },
+        { path: "*", element: <Navigate to="/" replace /> },
       ],
     },
   ]);

@@ -10,6 +10,14 @@ export const Game = () => {
   useEffect(() => {
     if (!socket) return;
 
+    socket.on("connected", (dog: any) => {
+      console.log("connected", dog);
+    });
+
+    socket.on("disconnected", (nickname: string) => {
+      setChat((prev) => [...prev, `${nickname} left the lobby`]);
+    });
+
     socket.on("newJoin", (nickname: string) => {
       setChat((prev) => [...prev, `${nickname} joined the lobby`]);
     });
